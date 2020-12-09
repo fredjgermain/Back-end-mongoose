@@ -1,7 +1,7 @@
 import express, {Request, Response} from 'express'; 
 
 function Access(req:Request, res:Response) { 
-  return res.status(200).send("<1>Api is ready</h1>"); 
+  return res.status(200).send("<h1>Api is ready</h1>"); 
 } 
 
 function MakeController() { 
