@@ -13,7 +13,7 @@ export class Controller{
 
   // Access ---------------------------------------
   public async Access(req:Request, res:Response) { 
-    const read = this.crud === undefined; 
+    const read = this === undefined; 
     return res.status(200).send(read); 
   } 
   
