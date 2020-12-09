@@ -7,7 +7,7 @@ function Access(req:Request, res:Response) {
 function MakeController() { 
   const controller = express.Router(); 
   controller.get('/api/', Access); 
-  return controller;
+  return controller; 
 } 
 const controller = MakeController(); 
 
