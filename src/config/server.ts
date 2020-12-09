@@ -1,5 +1,6 @@
 import express from 'express'; 
 import {MakeController} from '../controller/controller'; 
+import {MockData} from '../mockdata/mockinit'; 
 
 import cors from "cors"; 
 
@@ -9,7 +10,7 @@ app.use(cors());
 // Connect to mongoose Db
 const url = "mongodb+srv://admin:Ks6LwjuT2zewWcT@cluster0.m1ee1.mongodb.net/Cluster0?retryWrites=true&w=majority"; 
 const dbName = 'TestDb'; 
-const router = MakeController(url, dbName); 
+const router = MakeController(url, dbName, MockData); 
 app.use(router); 
 
 const options: cors.CorsOptions = {

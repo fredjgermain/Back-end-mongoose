@@ -130,8 +130,10 @@ export class Controller{
   }
 }
 
-function MakeController(url:string, dbName:string) { 
+function MakeController(url:string, dbName:string, MockData?:(crud:CrudMongoose)=>void) { 
   const ctrl = new Controller(url, dbName); 
+  if(MockData) 
+    MockData(ctrl.crud); 
   const router = express.Router(); 
   router.get('/api/', ctrl.Access); 
   router.get("/api/models/:modelName", ctrl.Models); 
