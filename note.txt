@@ -1,0 +1,1 @@
+https://dev.to/hte305/simple-deploy-typescript-application-to-heroku-5b6g
