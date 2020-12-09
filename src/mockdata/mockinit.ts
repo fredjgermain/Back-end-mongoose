@@ -36,5 +36,6 @@ export async function MockData(crud:CrudMongoose) {
 
   for(let i=0; i<collectionsMap.length; i++) { 
     const read = await crud.Read(collectionsMap[i].collectionName); 
+    //console.log(read.length); 
   } 
 } 
