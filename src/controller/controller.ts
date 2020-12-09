@@ -13,8 +13,8 @@ export class Controller{
 
   // Access ---------------------------------------
   public async Access(req:Request, res:Response) { 
-    const read = await this.crud.Read('collections'); 
-    return res.status(200).send(read.map( c => c["_id"] )); 
+    const read = this.crud.url; 
+    return res.status(200).send(read); 
   } 
   
   // Models --------------------------------------- 
