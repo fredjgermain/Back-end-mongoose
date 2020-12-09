@@ -1,4 +1,6 @@
-import express from 'express';
+import express from 'express'; 
+import {controller} from '../controller/controller'; 
+
 const app = express()
 const PORT : string|number = process.env.PORT || 5000;
 

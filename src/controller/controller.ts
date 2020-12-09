@@ -8,4 +8,4 @@ function Access(req:Request, res:Response) {
 
 controller.get('/api/', Access); 
 
-
+export {controller}; 
