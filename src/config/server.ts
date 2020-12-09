@@ -1,11 +1,16 @@
 import express from 'express'; 
-import {controller} from '../controller/controller'; 
+import {MakeController} from '../controller/controller'; 
 
 import cors from "cors"; 
 
 const app = express();
 app.use(cors()); 
-app.use(controller); 
+
+// Connect to mongoose Db
+const url = "mongodb+srv://admin:Ks6LwjuT2zewWcT@cluster0.m1ee1.mongodb.net/Cluster0?retryWrites=true&w=majority"; 
+const dbName = 'TestDb'; 
+const router = MakeController(url, dbName); 
+app.use(router); 
 
 const options: cors.CorsOptions = {
 /*allowedHeaders: [
