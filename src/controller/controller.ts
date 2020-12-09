@@ -1,11 +1,14 @@
 import express, {Request, Response} from 'express'; 
 
-const controller = express.Router(); 
-
 function Access(req:Request, res:Response) { 
-  return res.status(200).send("Api is ready"); 
+  return res.status(200).send("<1>Api is ready</h1>"); 
 } 
 
-controller.get('/api/', Access); 
+function MakeController() { 
+  const controller = express.Router(); 
+  controller.get('/api/', Access); 
+  return controller;
+} 
+const controller = MakeController(); 
 
 export {controller}; 
