@@ -4,10 +4,10 @@ import {MockData} from '../mockdata/mockinit';
 
 import cors from "cors"; 
 
-const app = express();
+const app = express(); 
 app.use(cors()); 
 
-// Connect to mongoose Db
+// Connect to mongoose Db 
 const url = "mongodb+srv://admin:Ks6LwjuT2zewWcT@cluster0.m1ee1.mongodb.net/Cluster0?retryWrites=true&w=majority"; 
 const dbName = 'TestDb'; 
 const router = MakeController(url, dbName, MockData); 
@@ -30,7 +30,7 @@ origin: "https://react-mongoose-demo.herokuapp.com",
 };
 
 app.use(cors(options)); 
-app.options('*', cors(options));
+app.options('*', cors(options)); 
 
 const PORT : string|number = process.env.PORT || 5000; 
 
@@ -38,5 +38,5 @@ const PORT : string|number = process.env.PORT || 5000;
     res.send("<h1>Welcome to your simple server! Awesome right</h1>");
 });*/
 
-app.listen(PORT,() => console.log(`hosting @${PORT}`));
+app.listen(PORT,() => console.log(`hosting @${PORT}`)); 
 

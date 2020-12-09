@@ -8,7 +8,7 @@ import {collectionsSchema, formsSchema, instructionsSchema,
 
 /*const url = "mongodb+srv://admin:Ks6LwjuT2zewWcT@cluster0.m1ee1.mongodb.net/Cluster0?retryWrites=true&w=majority"; 
 const dbName = 'TestDb'; 
-crud.Connect(url, dbName); */
+crud.Connect(url, dbName); */ 
 
 
 // MOCK -----------------------------------------
@@ -26,11 +26,15 @@ export async function MockData(crud:CrudMongoose) {
   collectionsMap.forEach( c => mongoose.model(c.collectionName, c.schema) ); 
 
   // empty each collection
-  for(let i=0; i<collectionsMap.length; i++) {
+  for(let i=0; i<collectionsMap.length; i++) { 
     await crud.Delete(collectionsMap[i].collectionName); 
   }
 
   for(let i=0; i<collectionsMap.length; i++) { 
     const create = await crud.Create(collectionsMap[i].collectionName, collectionsMap[i].data); 
+  } 
+
+  for(let i=0; i<collectionsMap.length; i++) { 
+    const read = await crud.Read(collectionsMap[i].collectionName); 
   } 
 } 
