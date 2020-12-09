@@ -12,12 +12,13 @@ export class Controller{
 
 
   // Access ---------------------------------------
-  public Access(req:Request, res:Response) { 
-    return res.status(200).send("<h1>Api is ready</h1>"); 
+  public async Access(req:Request, res:Response) { 
+    const read = await this.crud.Read('collections'); 
+    return res.status(200).send(read.map( c => c["_id"] )); 
   } 
   
   // Models --------------------------------------- 
-  public Models(req:Request, res:Response) { 
+  public async Models(req:Request, res:Response) { 
     const {modelName} = req.params; 
     if(modelName === 'undefined') { 
       //console.log(modelName); 
