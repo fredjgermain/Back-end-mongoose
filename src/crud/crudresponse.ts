@@ -1,9 +1,9 @@
 //import {Request, Response} from 'express'; 
 
 
-interface IReq {
-
-}
+interface IReq { 
+  
+} 
 
 interface IErr { 
   [index:string]: { 
@@ -26,6 +26,7 @@ export enum EnumCrudAction {
   DELETE = 'delete', 
 } 
 
+// Crud Response ================================ 
 export class CrudResponse { 
   public success: boolean = false; 
   public actionType: EnumCrudAction; 
@@ -58,8 +59,5 @@ export class CrudResponse {
     else if(res && res.message) { 
       this.err = [res.message]; 
     } 
-  }
-
-  
-}
-
+  } 
+} 

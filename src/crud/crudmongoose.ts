@@ -7,6 +7,7 @@ export interface IEntry extends mongoose.Model<any, {}> {
   [key:string]:any;
 }
 
+// Crud Mongoose ================================
 export default class CrudMongoose { 
   public url:string = ''; 
   public dbName: string = ''; 
@@ -25,19 +26,13 @@ export default class CrudMongoose {
     ) 
   } 
 
-
   private ToModel(modelName:string, item:any):IEntry { 
     const Model = this.Model(modelName); 
     let entry = {}; 
-    //console.log(item); 
     if(!Object.keys(item).includes('_id') || !item['_id']) 
       entry = {_id: new mongoose.Types.ObjectId(), ...item}; 
     else 
       entry = item; 
-
-    /*if(!Object.keys(item).includes('_id') || !item['_id']) 
-      return new Model({_id: new mongoose.Types.ObjectId(), ...item}); 
-    return new Model({item}); */
     return entry as IEntry; 
   }
 
@@ -64,18 +59,13 @@ export default class CrudMongoose {
   } 
 
   public Model(modelName:string) { 
-    //console.log(mongoose.models[modelName]); 
     return mongoose.models[modelName]; 
   } 
-
 
   // Create ....................................
   public async Create(modelName:string, datas:any):Promise<CrudResponse[]> { 
     const Model = this.Model(modelName); 
-
-    //console.log(datas); 
     const toAdd = this.ToModels(modelName, datas); 
-    //console.log(toAdd); 
     const responses:CrudResponse[] = []; 
     for(let i=0; i<toAdd.length; i++) { 
       await Model.insertMany(toAdd[i]) 
