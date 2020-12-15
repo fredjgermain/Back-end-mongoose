@@ -1,6 +1,23 @@
 import mongoose, { Schema } from 'mongoose'; 
 
 
+// PATIENT --------------------------------------
+const patientsSchema = {
+  _id: Schema.Types.ObjectId, 
+  firstName: { 
+    type: String, 
+    label: 'First name', 
+  }, 
+  lastName: { 
+    type: String, 
+    label: 'Last name', 
+  }, 
+  ramq: { 
+    type: String, 
+    label: 'ramq', 
+  }
+}
+
 // RESPONSE -------------------------------------
 const responsesSchema = { 
   _id: Schema.Types.ObjectId, 
@@ -98,6 +115,6 @@ const collectionsSchema = {
   } 
 } 
 
-export {collectionsSchema, formsSchema, instructionsSchema, responsesSchema, questionsSchema}; 
+export {collectionsSchema, formsSchema, instructionsSchema, responsesSchema, questionsSchema, patientsSchema}; 
 
 //crud.RegisterModel('collections', collectionsSchema); 

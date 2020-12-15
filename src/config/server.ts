@@ -23,11 +23,11 @@ const options: cors.CorsOptions = {
 ],
 credentials: true,
 methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',*/
-//origin: "http://localhost:3000", 
-origin: "https://react-mongoose-demo.herokuapp.com", 
+origin: "http://localhost:3000", 
+//origin: "https://react-mongoose-demo.herokuapp.com", 
 //origin: API_URL, 
-//preflightContinue: false,
-};
+//preflightContinue: false, 
+}; 
 
 app.use(cors(options)); 
 app.options('*', cors(options)); 

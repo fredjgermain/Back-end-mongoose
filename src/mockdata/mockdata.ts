@@ -23,6 +23,11 @@ const mockCollection = [
     accessor:'questions', 
     label:'Questions', 
   }, 
+  {
+    _id: new mongoose.Types.ObjectId(), 
+    accessor:'patients', 
+    label:'Patients', 
+  }, 
 ]; 
 
 // FORM -----------------------------------------
@@ -256,4 +261,15 @@ const questions = [
   }
 ]
 
-export {mockCollection, forms, instructions, responses, questions}; 
+// PATIENTS -------------------------------------
+const patients = [
+  {
+    _id: new mongoose.Types.ObjectId(), 
+    firstName: 'Frédéric', 
+    lastName: 'Jean-Germain',
+    ramq: 'JEAF83112314',
+  }
+]
+
+
+export {mockCollection, forms, instructions, responses, questions, patients}; 
