@@ -150,7 +150,7 @@ export function MakeController(url:string, dbName:string, MockData?:(crud:CrudMo
   
   router.get("/api/collection/:modelName", Collection); 
   router.get("/api/models/:modelName", Models); 
-  router.post('/api/create/:modelName', Create); 
+  router.put('/api/create/:modelName', Create); 
   router.put('/api/read/:modelName', Read); 
   router.put('/api/update/:modelName', Update); 
   router.put('/api/delete/:modelName', Delete); 
