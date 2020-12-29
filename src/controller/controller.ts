@@ -139,20 +139,17 @@ function ToIds(toIds:any) {
   return [toIds]; 
 }
 
-
-
 export function MakeController(url:string, dbName:string, MockData?:(crud:CrudMongoose)=>void) { 
   crud.Connect(url, dbName); 
   if(MockData) 
     MockData(crud); 
   const router = express.Router(); 
   router.get('/api/', Access);  // for connection test purposes
-  
-  router.get("/api/collection/:modelName", Collection); 
-  router.get("/api/models/:modelName", Models); 
-  router.put('/api/create/:modelName', Create); 
-  router.put('/api/read/:modelName', Read); 
-  router.put('/api/update/:modelName', Update); 
-  router.put('/api/delete/:modelName', Delete); 
+  router.get("/api/collection/:modelName/", Collection); 
+  router.get("/api/models/:modelName/", Models); 
+  router.put('/api/create/:modelName/', Create); 
+  router.put('/api/read/:modelName/', Read); 
+  router.put('/api/update/:modelName/', Update); 
+  router.put('/api/delete/:modelName/', Delete); 
   return router; 
 } 
