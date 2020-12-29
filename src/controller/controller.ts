@@ -146,12 +146,13 @@ export function MakeController(url:string, dbName:string, MockData?:(crud:CrudMo
   if(MockData) 
     MockData(crud); 
   const router = express.Router(); 
-  router.get('/api/', Access); 
+  router.get('/api/', Access);  // for connection test purposes
+  
   router.get("/api/collection/:modelName", Collection); 
   router.get("/api/models/:modelName", Models); 
-  router.post('/api/:modelName/create', Create); 
-  router.put('/api/:modelName/read', Read); 
-  router.put('/api/:modelName/update', Update); 
-  router.put('/api/:modelName/delete', Delete); 
+  router.post('/api/create/:modelName', Create); 
+  router.put('/api/read/:modelName', Read); 
+  router.put('/api/update/:modelName', Update); 
+  router.put('/api/delete/:modelName', Delete); 
   return router; 
 } 
