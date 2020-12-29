@@ -23,6 +23,22 @@ async function Models(req:Request, res:Response) {
   //return res.status(200).send('no model');
 } 
 
+// Collection ...................................
+async function Collection(req:Request, res:Response) { 
+  const {modelName} = req.params; 
+  if(modelName === 'undefined') { 
+    //console.log(modelName); 
+    res.status(200).send('Collection not found'); 
+    return; 
+  } 
+  //console.log(modelName === 'undefined'); 
+  await crud.Collection(modelName) 
+    .then( response => res.status(200).send(response))
+    .catch( err => Error500(EnumCrudAction.READ, req, res, err, 'Reading collection failed') ); 
+  ; 
+  //return res.status(200).send('no model'); 
+} 
+
 // Create .......................................
 async function Create(req:Request, res:Response) { 
   if( !RequestBodyNotNull(EnumCrudAction.CREATE, req, res) 
@@ -131,6 +147,7 @@ export function MakeController(url:string, dbName:string, MockData?:(crud:CrudMo
     MockData(crud); 
   const router = express.Router(); 
   router.get('/api/', Access); 
+  router.get("/api/collection/:modelName", Collection); 
   router.get("/api/models/:modelName", Models); 
   router.post('/api/:modelName/create', Create); 
   router.put('/api/:modelName/read', Read); 

@@ -53,6 +53,16 @@ export default class CrudMongoose {
     }); 
   } 
 
+  // GetCollection ...............................
+  public async Collection(modelName:string):Promise<CrudResponse> { 
+    const collections = await this.Read('collections'); 
+    const found = collections.find(c => c['accessor'] === modelName); 
+    const fields = this.Model(modelName).schema.paths; 
+    const entries = await this.Read(modelName); 
+    const data = {accessor:found['accessor'], label:found['label'], fields, entries}; 
+    return new CrudResponse(EnumCrudAction.READ, true, data); 
+  } 
+
   // Model .......................................
   public Models() { 
     return mongoose.models; 
