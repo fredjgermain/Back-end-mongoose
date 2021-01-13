@@ -284,10 +284,7 @@ const answers = [
     _id: new mongoose.Types.ObjectId(), 
     patient: patients[0], 
     question: questions[0], 
-    answer: { 
-      type: Number, 
-      label: 'Answer', 
-    } 
+    answer: 0, 
   }
 ]; 
 
