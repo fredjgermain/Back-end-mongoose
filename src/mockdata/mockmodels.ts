@@ -3,27 +3,11 @@ import { Schema } from 'mongoose';
 
 const answersSchema = {
   _id: Schema.Types.ObjectId, 
-  pid: Schema.Types.ObjectId, // ???
-  qid: Schema.Types.ObjectId, // ???
-
-  labels: { 
-    type: [String], 
-    label: 'Question text', 
-  }, 
-  responseType: { 
+  question: { 
     type: Schema.Types.ObjectId, 
-    ref: 'responses', 
-    label: 'Response type', 
+    ref: 'questions', 
+    label: 'Question', 
   }, 
-  instructions: {
-    type: [Schema.Types.ObjectId], 
-    ref: 'instructions', 
-    label: 'Applicable instructions', 
-  },
-  optional: { 
-    type: Boolean, 
-    label: 'Is optional', 
-  },
   answer: { 
     type: Number, 
     label: 'Answer', 
