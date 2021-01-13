@@ -30,6 +30,10 @@ const mockCollection = [
   }, 
 ]; 
 
+
+// ANSWERS --------------------------------------
+const answers:any[] = []; 
+
 // FORM -----------------------------------------
 const forms = [ 
   { 
@@ -266,10 +270,10 @@ const patients = [
   {
     _id: new mongoose.Types.ObjectId(), 
     firstName: 'Frédéric', 
-    lastName: 'Jean-Germain',
-    ramq: 'JEAF83112314',
+    lastName: 'Jean-Germain', 
+    ramq: 'JEAF83112314', 
   }
 ]
 
 
-export {mockCollection, forms, instructions, responses, questions, patients}; 
+export {mockCollection, forms, instructions, responses, questions, patients, answers}; 

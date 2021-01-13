@@ -1,4 +1,34 @@
-import mongoose, { Schema } from 'mongoose'; 
+import { Schema } from 'mongoose'; 
+
+
+const answersSchema = {
+  _id: Schema.Types.ObjectId, 
+  pid: Schema.Types.ObjectId, // ???
+  qid: Schema.Types.ObjectId, // ???
+
+  labels: { 
+    type: [String], 
+    label: 'Question text', 
+  }, 
+  responseType: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'responses', 
+    label: 'Response type', 
+  }, 
+  instructions: {
+    type: [Schema.Types.ObjectId], 
+    ref: 'instructions', 
+    label: 'Applicable instructions', 
+  },
+  optional: { 
+    type: Boolean, 
+    label: 'Is optional', 
+  },
+  answer: { 
+    type: Number, 
+    label: 'Answer', 
+  } 
+}
 
 
 // PATIENT --------------------------------------
@@ -14,7 +44,7 @@ const patientsSchema = {
   }, 
   ramq: { 
     type: String, 
-    label: 'ramq', 
+    label: 'Ramq', 
   }
 }
 
@@ -24,6 +54,7 @@ const responsesSchema = {
   rId: { 
     type: String, 
     label: 'Response Id', 
+    abbrev: true, 
   }, 
   responseType: { 
     type: Schema.Types.Mixed, 
@@ -37,6 +68,7 @@ const formsSchema = {
   fId: { 
     type: String, 
     label: 'Form Id', 
+    abbrev: true, 
   }, 
   titles: { 
     type: [String], 
@@ -51,6 +83,7 @@ const instructionsSchema = {
   iId: { 
     type: String, 
     label: 'Instruction Id', 
+    abbrev: true, 
   }, 
   /*order: { 
     type: Number, 
@@ -68,6 +101,7 @@ const questionsSchema = {
   qId: { 
     type: String,
     label: 'Question Id', 
+    abbrev: true, 
   }, 
   form: { 
     type: Schema.Types.ObjectId, ref: 'forms', 
@@ -88,11 +122,13 @@ const questionsSchema = {
     label: 'Question text', 
   }, 
   responseType: { 
-    type: Schema.Types.ObjectId, ref: 'responses', 
+    type: Schema.Types.ObjectId, 
+    ref: 'responses', 
     label: 'Response type', 
   }, 
   instructions: {
-    type: [Schema.Types.ObjectId], ref: 'instructions', 
+    type: [Schema.Types.ObjectId], 
+    ref: 'instructions', 
     label: 'Applicable instructions', 
   },
   optional: { 
@@ -115,6 +151,6 @@ const collectionsSchema = {
   } 
 } 
 
-export {collectionsSchema, formsSchema, instructionsSchema, responsesSchema, questionsSchema, patientsSchema}; 
+export {collectionsSchema, formsSchema, instructionsSchema, responsesSchema, questionsSchema, patientsSchema, answersSchema}; 
 
 //crud.RegisterModel('collections', collectionsSchema); 

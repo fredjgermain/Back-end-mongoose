@@ -1,8 +1,8 @@
 import CrudMongoose from '../crud/crudmongoose'; 
 import mongoose from 'mongoose'; 
-import {mockCollection, forms, instructions, responses, questions, patients} from './mockdata'; 
+import {mockCollection, forms, instructions, responses, questions, patients, answers} from './mockdata'; 
 import {collectionsSchema, formsSchema, instructionsSchema, 
-  responsesSchema, questionsSchema, patientsSchema} from './mockmodels'; 
+  responsesSchema, questionsSchema, patientsSchema, answersSchema} from './mockmodels'; 
 
 //export const crud = new CrudMongoose(); 
 
@@ -19,6 +19,7 @@ const collectionsMap = [
   {collectionName:'questions', schema:new mongoose.Schema(questionsSchema), data:questions}, 
   {collectionName:'collections', schema:new mongoose.Schema(collectionsSchema), data:mockCollection}, 
   {collectionName:'patients', schema:new mongoose.Schema(patientsSchema), data:patients}, 
+  {collectionName:'answers', schema:new mongoose.Schema(answersSchema), data:answers}, 
 ]; 
 
 
