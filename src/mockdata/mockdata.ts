@@ -28,6 +28,11 @@ const mockCollection = [
     accessor:'patients', 
     label:'Patients', 
   }, 
+  {
+    _id: new mongoose.Types.ObjectId(), 
+    accessor:'answers', 
+    label:'Answers', 
+  }, 
 ]; 
 
 // FORM -----------------------------------------
