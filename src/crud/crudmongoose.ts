@@ -79,8 +79,8 @@ export default class CrudMongoose {
     const responses:CrudResponse[] = []; 
     for(let i=0; i<toAdd.length; i++) { 
       await Model.insertMany(toAdd[i]) 
-        .then( (res:any) => responses.push(new CrudResponse(EnumCrudAction.CREATE, true, res)) ) 
-        .catch( (err:any) => responses.push(new CrudResponse(EnumCrudAction.CREATE, false, [], err)) ); 
+        .then( (res:any) => responses.push(new CrudResponse(EnumCrudAction.CREATE, true, res[0])) ) 
+        .catch( (err:any) => responses.push(new CrudResponse(EnumCrudAction.CREATE, false, toAdd[i], err)) ); 
     } 
     return responses; 
   } 
@@ -100,7 +100,7 @@ export default class CrudMongoose {
     for(let i=0; i<toUpdate.length; i++) { 
       await Model.updateOne({_id: toUpdate[i]._id }, toUpdate[i]) 
         .then( (res:any) => responses.push(new CrudResponse(EnumCrudAction.UPDATE, true, toUpdate[i])) ) 
-        .catch( (err:any) => responses.push(new CrudResponse(EnumCrudAction.UPDATE, false, [], err)) ); 
+        .catch( (err:any) => responses.push(new CrudResponse(EnumCrudAction.UPDATE, false, toUpdate[i], err)) ); 
     } 
     return responses; 
   } 
@@ -115,7 +115,7 @@ export default class CrudMongoose {
     for(let i=0; i<toDelete.length; i++) { 
       await Model.deleteMany(toDelete[i]) 
         .then( (res:any) => responses.push(new CrudResponse(EnumCrudAction.DELETE, true, toDelete[i])) ) 
-        .catch( (err:any) => responses.push(new CrudResponse(EnumCrudAction.DELETE, false, [], err)) ); 
+        .catch( (err:any) => responses.push(new CrudResponse(EnumCrudAction.DELETE, false, toDelete[i], err)) ); 
     } 
     return responses; 
   }
