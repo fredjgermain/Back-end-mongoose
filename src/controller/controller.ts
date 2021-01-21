@@ -7,7 +7,10 @@ const crud:CrudMongoose = new CrudMongoose();
 
 // Access ---------------------------------------
 async function Access(req:Request, res:Response) { 
-  return res.status(200).send("Access was successful"); 
+  function Test() { 
+    return true; 
+  }
+  return res.status(200).send(Test); 
 } 
 
 // Models --------------------------------------- 
