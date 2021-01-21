@@ -53,11 +53,12 @@ const formsSchema = {
     type: String, 
     label: 'Form Id', 
     abbrev: true, 
+    required: true, 
   }, 
   titles: { 
     type: [String], 
     label: "Form's title", 
-    //validate: [(v:any) => Array.isArray(v) && v.length > 0, "array error msg "], 
+    validate: [(v:any) => Array.isArray(v) && v.length > 0, "array error msg "], 
   }, 
 } 
 

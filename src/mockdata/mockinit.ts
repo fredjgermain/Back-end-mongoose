@@ -38,6 +38,13 @@ export async function MockData(crud:CrudMongoose) {
 
   for(let i=0; i<collectionsMap.length; i++) { 
     const read = await crud.Read(collectionsMap[i].collectionName); 
-    //console.log(read.length); 
   } 
+
+  /*const invalidForm = {
+    _id: new mongoose.Types.ObjectId(), 
+    fId: 'f1', 
+    titles: ['form 1'] 
+  } 
+  const createInvalid = await crud.Create('forms', invalidForm); 
+  console.log(createInvalid); */
 } 
