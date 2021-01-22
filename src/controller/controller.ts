@@ -10,7 +10,7 @@ async function Access(req:Request, res:Response) {
   function Test() { 
     return true; 
   }
-  return res.status(200).send(Test); 
+  return res.status(200).send('access'); 
 } 
 
 // Models --------------------------------------- 
