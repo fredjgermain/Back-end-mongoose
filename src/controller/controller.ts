@@ -10,7 +10,8 @@ async function Access(req:Request, res:Response) {
   function Test() { 
     return true; 
   }
-  return res.status(200).send(Test); 
+  const response = {func:Test}; 
+  return res.status(200).send(response); 
 } 
 
 // Models --------------------------------------- 
