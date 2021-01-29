@@ -1,12 +1,36 @@
 import { Schema } from 'mongoose'; 
 
+function RamqValidation (value:any) { 
+  return new RegExp('^[a-zA-Z]{4}[0-9]{8}$').test(value as string); 
+} 
+
+const ArrayLengthValidation = (values:any[], min?:number, max?:number) => { 
+  if(!values && min) 
+    return false; 
+  const minCondition = min ? (values.length >= min) : true; 
+  const maxCondition = max ? (values.length <= max) : true; 
+  return minCondition && maxCondition; 
+} 
+
+function ElementsValidation (values:any[], ElementValidation:(e:any) => boolean) { 
+  return values.every(ElementValidation); 
+} 
+
+
 
 const answersSchema = {
   _id: Schema.Types.ObjectId, 
+  patient: {
+    type: Schema.Types.ObjectId, 
+    ref: 'questions', 
+    label: 'Patient', 
+    required: true, 
+  }, 
   question: { 
     type: Schema.Types.ObjectId, 
     ref: 'questions', 
     label: 'Question', 
+    required: true, 
   }, 
   answer: { 
     type: Number, 
@@ -16,20 +40,27 @@ const answersSchema = {
 
 
 // PATIENT --------------------------------------
-const patientsSchema = {
+const patientsSchema = { 
   _id: Schema.Types.ObjectId, 
   firstName: { 
     type: String, 
     label: 'First name', 
+    required: true, 
   }, 
   lastName: { 
     type: String, 
     label: 'Last name', 
+    required: true, 
   }, 
   ramq: { 
     type: String, 
     label: 'Ramq', 
-  }
+    required: [true, 'is required'], 
+    validate: { 
+      validator: RamqValidation, 
+      message: (prop:any) => 'ramq error', 
+    } 
+  } 
 }
 
 // RESPONSE -------------------------------------
@@ -58,7 +89,10 @@ const formsSchema = {
   titles: { 
     type: [String], 
     label: "Form's title", 
-    validate: [(v:any) => Array.isArray(v) && v.length > 0, "array error msg "], 
+    validate: { 
+      validator: (value:any) => ArrayLengthValidation(value, 1, undefined), 
+      message: (prop:any) => 'array error', 
+    } 
   }, 
 } 
 
@@ -128,11 +162,12 @@ const collectionsSchema = {
   _id: Schema.Types.ObjectId, 
   accessor: { 
     type: String, 
-    label: 'Response Id', 
+    label: 'Accessor', 
   }, 
   label: { 
     type: String, 
-    label: 'Responses', 
+    label: 'Label', 
+    abbrev: true, 
   } 
 } 
 
