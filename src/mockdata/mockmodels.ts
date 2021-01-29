@@ -17,7 +17,7 @@ function ElementsValidation (values:any[], ElementValidation:(e:any) => boolean)
 } 
 
 
-
+// ANSWER ---------------------------------------
 const answersSchema = {
   _id: Schema.Types.ObjectId, 
   patient: {
@@ -56,12 +56,14 @@ const patientsSchema = {
     type: String, 
     label: 'Ramq', 
     required: [true, 'is required'], 
+    regex: '^[a-zA-Z]{4}[0-9]{8}$', 
     validate: { 
       validator: RamqValidation, 
       message: (prop:any) => 'ramq error', 
     } 
   } 
 }
+
 
 // RESPONSE -------------------------------------
 const responsesSchema = { 
@@ -76,6 +78,7 @@ const responsesSchema = {
     label: 'Responses', 
   } 
 } 
+
 
 // FORM -----------------------------------------
 const formsSchema = { 
@@ -96,6 +99,7 @@ const formsSchema = {
   }, 
 } 
 
+
 // INSTRUCTION ----------------------------------
 const instructionsSchema = { 
   _id: Schema.Types.ObjectId, 
@@ -113,6 +117,7 @@ const instructionsSchema = {
     label: "Instruction label", 
   }, 
 } 
+
 
 // QUESTION -------------------------------------
 const questionsSchema = {
