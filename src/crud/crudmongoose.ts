@@ -7,12 +7,12 @@ export interface IEntry extends mongoose.Model<any, {}> {
   [key:string]:any;
 }
 
-// Crud Mongoose ================================
+// Crud Mongoose ================================ 
 export default class CrudMongoose { 
   public url:string = ''; 
   public dbName: string = ''; 
 
-  // Connect ....................................
+  // Connect .................................... 
   public async Connect(url:string, dbName:string) { 
     mongoose.connect( url, 
       { 
@@ -26,34 +26,18 @@ export default class CrudMongoose {
     ) 
   } 
 
-  private ToModel(modelName:string, item:any):IEntry { 
-    const Model = this.Model(modelName); 
-    let entry = {}; 
-    if(!Object.keys(item).includes('_id') || !item['_id']) 
-      entry = {_id: new mongoose.Types.ObjectId(), ...item}; 
-    else 
-      entry = item; 
-    return entry as IEntry; 
-  }
 
-  public ToModels(modelName:string, items:any):IEntry[] {
-    if(Array.isArray(items)) 
-      return items.map( i => this.ToModel(modelName, i)); 
-    return [this.ToModel(modelName, items)]; 
-  }
-
-  // Register/Unregister ........................
-  public RegisterModel(modelName:string, schema:mongoose.Schema) { 
-    return mongoose.model(modelName, schema); 
+  // Collections .......................................... 
+  public async Collections(acccessors:string[]): Promise<CrudResponse[]> { 
+    const collections = [] as CrudResponse[]; 
+    for(let i=0; i<acccessors.length; i++) { 
+      const collection = await this.Collection(acccessors[i]); 
+      collections.push(collection); 
+    } 
+    return collections; 
   } 
-
-  public UnregisterModel(modelName:string) { 
-    mongoose.connection.collections[modelName].drop( err => { 
-      console.log(`Collection: ${modelName} has been dropped`); 
-    }); 
-  } 
-
-  // GetCollection ...............................
+  
+  // Collection ...........................................
   public async Collection(modelName:string):Promise<CrudResponse> { 
     const collections = await this.Read('collections'); 
     const found = collections.find(c => c['accessor'] === modelName); 
@@ -63,19 +47,31 @@ export default class CrudMongoose {
     return new CrudResponse(EnumCrudAction.READ, true, data); 
   } 
 
-  // Model .......................................
-  public Models() { 
-    return mongoose.models; 
+  // Validate ............................................. 
+  public async Validate(modelName:string, entries:IEntry[]) { 
+    /*const Model = this.Model(modelName); 
+    const toValidate = this.ToModels(modelName, entries); */
+    const responses = [] as CrudResponse[]; 
+
+    /*for(let i=0; i<toValidate.length; i++) { 
+      await Model.insertMany(toValidate[i]) 
+        .then( (res:any) => responses.push(new CrudResponse(EnumCrudAction.CREATE, true, res[0])) ) 
+        .catch( (err:any) => responses.push(new CrudResponse(EnumCrudAction.CREATE, false, toValidate[i], err)) ); 
+    } */ 
+    return responses; 
   } 
 
-  public Model(modelName:string) { 
-    return mongoose.models[modelName]; 
+  // Ids .................................................. 
+  public async Ids(modelName:string): Promise<string[]> { 
+    const entries = await this.Read(modelName); 
+    return entries.map(e => e['_id']); 
   } 
 
   // Create ....................................
-  public async Create(modelName:string, datas:any):Promise<CrudResponse[]> { 
+  public async Create(modelName:string, entries:any[]):Promise<CrudResponse[]> { 
     const Model = this.Model(modelName); 
-    const toAdd = this.ToModels(modelName, datas); 
+    //const toAdd = this.ToModels(modelName, entries); 
+    const toAdd = entries; 
     const responses:CrudResponse[] = []; 
     for(let i=0; i<toAdd.length; i++) { 
       await Model.insertMany(toAdd[i]) 
@@ -93,9 +89,10 @@ export default class CrudMongoose {
   } 
 
   // Update .....................................
-  public async Update(modelName:string, datas:any):Promise<CrudResponse[]> { 
+  public async Update(modelName:string, entries:any[]):Promise<CrudResponse[]> { 
     const Model = this.Model(modelName); 
-    const toUpdate = this.ToModels(modelName, datas); 
+    //const toUpdate = this.ToModels(modelName, entries); 
+    const toUpdate = entries; 
     const responses:CrudResponse[] = []; 
     for(let i=0; i<toUpdate.length; i++) { 
       await Model.updateOne({_id: toUpdate[i]._id }, toUpdate[i]) 
@@ -106,17 +103,64 @@ export default class CrudMongoose {
   } 
 
   // Delete .....................................
-  public async Delete(modelName:string, ids?:any):Promise<CrudResponse[]> { 
+  public async Delete(modelName:string, entries?:any[]):Promise<CrudResponse[]> { 
     const Model = this.Model(modelName); 
     const responses:CrudResponse[] = []; 
-    const toDelete = await this.Read(modelName, ids); 
-    if(toDelete.length === 0) 
-      responses.push(new CrudResponse(EnumCrudAction.DELETE, false, ids, "Item.s could not be found.")); 
+    const ids = entries?.map(e => e._id); 
+    const toDelete = ids ? await this.Read(modelName, ids): await this.Read(modelName); 
+
+    const foundIds = toDelete.map(e=> JSON.stringify(e._id)); 
+    const notFound = entries?.filter(e => { 
+      return !foundIds.includes(JSON.stringify(e._id)); 
+    }) ?? []; 
+
+    // Delete specified items 
     for(let i=0; i<toDelete.length; i++) { 
       await Model.deleteMany(toDelete[i]) 
         .then( (res:any) => responses.push(new CrudResponse(EnumCrudAction.DELETE, true, toDelete[i])) ) 
         .catch( (err:any) => responses.push(new CrudResponse(EnumCrudAction.DELETE, false, toDelete[i], err)) ); 
     } 
+    for(let i=0; i<notFound.length; i++) { 
+      responses.push(new CrudResponse(EnumCrudAction.DELETE, false, notFound[i], 'Item could not be found.')); 
+    } 
     return responses; 
   }
+  
+
+  // =======================================================
+  //private IdExist(modelName:string, )
+
+  private ToModel(modelName:string, item:any):IEntry { 
+    const Model = this.Model(modelName); 
+    let entry = {}; 
+    if(!Object.keys(item).includes('_id') || !item['_id']) 
+      entry = {_id: new mongoose.Types.ObjectId(), ...item}; 
+    else 
+      entry = item; 
+    return entry as IEntry; 
+  }
+
+  /*public ToModels(modelName:string, items:any):IEntry[] {
+    if(Array.isArray(items)) 
+      return items.map( i => this.ToModel(modelName, i)); 
+    return [this.ToModel(modelName, items)]; 
+  }*/
+
+  // Register/Unregister ........................
+  public RegisterModel(modelName:string, schema:mongoose.Schema) { 
+    return mongoose.model(modelName, schema); 
+  } 
+
+  public UnregisterModel(modelName:string) { 
+    mongoose.connection.collections[modelName].drop( err => { 
+      console.log(`Collection: ${modelName} has been dropped`); 
+    }); 
+  } 
+
+  // Model .......................................
+  public Model(modelName:string) { 
+    return mongoose.models[modelName]; 
+  } 
+
+
 }

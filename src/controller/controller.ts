@@ -5,29 +5,21 @@ import {EnumCrudAction, CrudResponse} from '../crud/crudresponse';
 // CONTROLLER ===================================
 const crud:CrudMongoose = new CrudMongoose(); 
 
-// Access ---------------------------------------
+// Access -------------------------------------------------
 async function Access(req:Request, res:Response) { 
-  function Test() { 
-    return true; 
-  }
-  const response = {func:Test}; 
-  return res.status(200).send(response); 
+  return res.status(200).send('Test access'); 
 } 
 
-// Models --------------------------------------- 
-async function Models(req:Request, res:Response) { 
-  const {modelName} = req.params; 
-  if(modelName === 'undefined') { 
-    //console.log(modelName); 
-    res.status(200).send(Object.keys(crud.Models()).map( s => s )); 
+// Collections ............................................
+async function Collections(req:Request, res:Response) { 
+  if( !RequestBodyNotNull(EnumCrudAction.READ, req, res) ) 
     return; 
-  } 
-  //console.log(modelName === 'undefined'); 
-  res.status(200).send(crud.Model(modelName).schema); 
-  //return res.status(200).send('no model');
+  await crud.Collections(req.body)
+    .then( response => res.status(200).send(response) ) 
+    .catch( err => Error500(EnumCrudAction.READ, req, res, err, 'Cound not read collections') ); 
 } 
 
-// Collection ...................................
+// Collection .............................................
 async function Collection(req:Request, res:Response) { 
   const {modelName} = req.params; 
   if(modelName === 'undefined') { 
@@ -43,13 +35,23 @@ async function Collection(req:Request, res:Response) {
   //return res.status(200).send('no model'); 
 } 
 
+// Ids ....................................................
+async function Ids(req:Request, res:Response) { 
+  if( !ModelNameIsFound(EnumCrudAction.READ, req, res) ) 
+    return; 
+  const {modelName} = req.params; 
+  await crud.Ids(modelName) 
+    .then( response => res.status(200).send(response) ) 
+    .catch( err => Error500(EnumCrudAction.READ, req, res, err, 'Cound not read ids') ); 
+}
+
 // Create .......................................
 async function Create(req:Request, res:Response) { 
   if( !RequestBodyNotNull(EnumCrudAction.CREATE, req, res) 
     || !ModelNameIsFound(EnumCrudAction.CREATE, req, res) ) 
     return; 
   const {modelName} = req.params; 
-  await crud.Create(modelName, req.body) 
+  await crud.Create(modelName, req.body) // make sure req.body is propertly formed ??
     .then( response => res.status(200).send(response) ) 
     .catch( err => Error500(EnumCrudAction.CREATE, req, res, err, 'Creation failed') ); 
 } 
@@ -60,7 +62,7 @@ async function Read(req:Request, res:Response) {
     return; 
   const {modelName} = req.params; 
   const ids = ToIds(req.body); 
-  return await crud.Read(modelName, ids)
+  await crud.Read(modelName, ids) // make sure req.body is propertly formed ??
     .then( response => res.status(200).send(response) )
     .catch( err => Error500(EnumCrudAction.READ, req, res, err, 'Read failed') );
 } 
@@ -71,21 +73,24 @@ async function Update(req:Request, res:Response) {
     || !ModelNameIsFound(EnumCrudAction.UPDATE, req, res) ) 
     return; 
   const {modelName} = req.params; 
-  await crud.Update(modelName, req.body) 
+  await crud.Update(modelName, req.body) // make sure req.body is propertly formed ??
     .then( response => res.status(200).send(response) ) 
-    .catch( err => Error500(EnumCrudAction.UPDATE, req, res, err, 'Creation failed') ); 
+    .catch( err => Error500(EnumCrudAction.UPDATE, req, res, err, 'Update failed') ); 
 } 
 
 // Delete .......................................
 async function Delete(req:Request, res:Response) { 
   if(!ModelNameIsFound(EnumCrudAction.DELETE, req, res) ) 
-    return;
+    return; 
   const {modelName} = req.params; 
-  await crud.Delete(modelName, ToIds(req.body)) 
+  await crud.Delete(modelName, req.body) // make sure req.body is propertly formed ??
     .then( response => res.status(200).send(response) ) 
-    .catch( err => Error500(EnumCrudAction.DELETE, req, res, err, 'Creation failed') ); 
+    .catch( err => Error500(EnumCrudAction.DELETE, req, res, err, 'Deletion failed') ); 
 } 
 
+
+
+// ########################################################
 function RequestBodyNotNull(action:EnumCrudAction, req:Request, res:Response) { 
   if(IsNullOrEmpty(req) || IsNullOrEmpty(req.body)) { 
     const crudErr = new CrudResponse(action, false, req.body); 
@@ -148,12 +153,29 @@ export function MakeController(url:string, dbName:string, MockData?:(crud:CrudMo
   if(MockData) 
     MockData(crud); 
   const router = express.Router(); 
-  router.get('/api/', Access);  // for connection test purposes
-  router.get("/api/collection/:modelName/", Collection); 
-  router.get("/api/models/:modelName/", Models); 
+  router.get('/api/', Access);  // for connection test purposes 
+  router.get("/api/ids/:modelName/", Ids); 
+  router.put("/api/collections/", Collections); 
+  router.put("/api/collection/:modelName/", Collection); 
+  //router.get("/api/models/:modelName/", Models); 
   router.put('/api/create/:modelName/', Create); 
   router.put('/api/read/:modelName/', Read); 
   router.put('/api/update/:modelName/', Update); 
   router.put('/api/delete/:modelName/', Delete); 
   return router; 
 } 
+
+
+
+// Models --------------------------------------- 
+/*async function Models(req:Request, res:Response) { 
+  const {modelName} = req.params; 
+  if(modelName === 'undefined') { 
+    //console.log(modelName); 
+    res.status(200).send(Object.keys(crud.Models()).map( s => s )); 
+    return; 
+  } 
+  //console.log(modelName === 'undefined'); 
+  res.status(200).send(crud.Model(modelName).schema); 
+  //return res.status(200).send('no model');
+} */

@@ -33,12 +33,24 @@ export async function MockData(crud:CrudMongoose) {
   }
 
   for(let i=0; i<collectionsMap.length; i++) { 
-    const create = await crud.Create(collectionsMap[i].collectionName, collectionsMap[i].data); 
+    await crud.Create(collectionsMap[i].collectionName, collectionsMap[i].data); 
+  } 
+
+  /*for(let i=0; i<collectionsMap.length; i++) { 
+    const read = await crud.Read(collectionsMap[i].collectionName); 
   } 
 
   for(let i=0; i<collectionsMap.length; i++) { 
-    const read = await crud.Read(collectionsMap[i].collectionName); 
+    const ids = await crud.Ids(collectionsMap[i].collectionName); 
+    console.log(ids);
   } 
+
+  for(let i=0; i<collectionsMap.length; i++) { 
+    const collections = await crud.Collections(['questions', 'responses']); 
+    console.log(collections); 
+  } */
+  
+  
 
   /*const invalidForm = {
     _id: new mongoose.Types.ObjectId(), 
