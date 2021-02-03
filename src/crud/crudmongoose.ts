@@ -70,8 +70,7 @@ export default class CrudMongoose {
   // Create ....................................
   public async Create(modelName:string, entries:any[]):Promise<CrudResponse[]> { 
     const Model = this.Model(modelName); 
-    //const toAdd = this.ToModels(modelName, entries); 
-    const toAdd = entries; 
+    const toAdd = this.ToModels(modelName, entries); 
     const responses:CrudResponse[] = []; 
     for(let i=0; i<toAdd.length; i++) { 
       await Model.insertMany(toAdd[i]) 
@@ -91,8 +90,7 @@ export default class CrudMongoose {
   // Update .....................................
   public async Update(modelName:string, entries:any[]):Promise<CrudResponse[]> { 
     const Model = this.Model(modelName); 
-    //const toUpdate = this.ToModels(modelName, entries); 
-    const toUpdate = entries; 
+    const toUpdate = this.ToModels(modelName, entries); 
     const responses:CrudResponse[] = []; 
     for(let i=0; i<toUpdate.length; i++) { 
       await Model.updateOne({_id: toUpdate[i]._id }, toUpdate[i]) 
@@ -140,11 +138,11 @@ export default class CrudMongoose {
     return entry as IEntry; 
   }
 
-  /*public ToModels(modelName:string, items:any):IEntry[] {
+  public ToModels(modelName:string, items:any):IEntry[] {
     if(Array.isArray(items)) 
       return items.map( i => this.ToModel(modelName, i)); 
     return [this.ToModel(modelName, items)]; 
-  }*/
+  }
 
   // Register/Unregister ........................
   public RegisterModel(modelName:string, schema:mongoose.Schema) { 
