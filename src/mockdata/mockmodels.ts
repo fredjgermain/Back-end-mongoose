@@ -18,12 +18,12 @@ function ElementsValidation (values:any[], ElementValidation:(e:any) => boolean)
 
 
 // ANSWER ---------------------------------------
-const answersSchema = {
+const answersSchema = { 
   _id: Schema.Types.ObjectId, 
-  patient: {
+  session: { 
     type: Schema.Types.ObjectId, 
-    ref: 'questions', 
-    label: 'Patient', 
+    ref: 'sessions', 
+    label: 'Session', 
     required: true, 
   }, 
   question: { 
@@ -37,6 +37,20 @@ const answersSchema = {
     label: 'Answer', 
   } 
 }
+
+
+// SESSION --------------------------------------
+const sessionsSchema = { 
+  _id: Schema.Types.ObjectId, 
+  patient: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'patients', 
+    label: 'Patient', 
+  }, 
+  date: { 
+    type: Date, 
+  } 
+} 
 
 
 // PATIENT --------------------------------------
@@ -128,7 +142,8 @@ const questionsSchema = {
     abbrev: true, 
   }, 
   form: { 
-    type: Schema.Types.ObjectId, ref: 'forms', 
+    type: Schema.Types.ObjectId,
+    ref: 'forms', 
     label: 'Associated form', 
   }, 
   section: { 
@@ -176,6 +191,13 @@ const collectionsSchema = {
   } 
 } 
 
-export {collectionsSchema, formsSchema, instructionsSchema, responsesSchema, questionsSchema, patientsSchema, answersSchema}; 
+export {collectionsSchema, 
+  formsSchema, 
+  instructionsSchema, 
+  responsesSchema, 
+  questionsSchema, 
+  patientsSchema, 
+  answersSchema, 
+  sessionsSchema}; 
 
 //crud.RegisterModel('collections', collectionsSchema); 

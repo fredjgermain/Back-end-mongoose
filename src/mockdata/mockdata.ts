@@ -33,6 +33,11 @@ const mockCollection = [
     accessor:'answers', 
     label:'Answers', 
   }, 
+  {
+    _id: new mongoose.Types.ObjectId(), 
+    accessor:'sessions', 
+    label:'Sessions', 
+  }, 
 ]; 
 
 // FORM -----------------------------------------
@@ -279,14 +284,11 @@ const patients = [
 
 
 // ANSWERS --------------------------------------
-const answers = [
-  {
-    _id: new mongoose.Types.ObjectId(), 
-    patient: patients[0], 
-    question: questions[0], 
-    answer: 0, 
-  }
-]; 
+const answers:any[] = []; 
 
 
-export {mockCollection, forms, instructions, responses, questions, patients, answers}; 
+// SESSIONS -------------------------------------
+const sessions:any[] = []; 
+
+
+export {mockCollection, forms, instructions, responses, questions, patients, answers, sessions}; 
