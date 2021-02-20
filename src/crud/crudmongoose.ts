@@ -39,10 +39,10 @@ export default class CrudMongoose {
   
   // Collection ...........................................
   public async Collection(modelName:string):Promise<CrudResponse> { 
-    const collections = await this.Read('collections'); 
+    const collections = await this.Find('collections'); 
     const found = collections.find(c => c['accessor'] === modelName); 
     const fields = this.Model(modelName).schema.paths; 
-    const entries = await this.Read(modelName); 
+    const entries = await this.Find(modelName); 
     const data = {accessor:found['accessor'], label:found['label'], fields, entries}; 
     return new CrudResponse(EnumCrudAction.READ, true, data); 
   } 
@@ -63,7 +63,7 @@ export default class CrudMongoose {
 
   // Ids .................................................. 
   public async Ids(modelName:string): Promise<string[]> { 
-    const entries = await this.Read(modelName); 
+    const entries = await this.Find(modelName); 
     return entries.map(e => e['_id']); 
   } 
 
@@ -80,11 +80,18 @@ export default class CrudMongoose {
     return responses; 
   } 
 
-  // Read .......................................
-  public async Read(modelName:string, ids?:string[]) { 
+  // Find .......................................
+  private async Find(modelName:string, ids?:string[]) { 
     const Model = this.Model(modelName); 
     const selector = ids && ids.length > 0 ? {_id: {$in: ids} }: {}; 
     return await Model.find(selector); 
+  } 
+
+  // Read .......................................
+  public async Read(modelName:string, ids?:string[]) { 
+    const Model = this.Model(modelName); 
+    const found = await this.Find(modelName, ids); 
+    return found.map( data => new CrudResponse(EnumCrudAction.READ, true, data)); 
   } 
 
   // Update .....................................
@@ -105,7 +112,7 @@ export default class CrudMongoose {
     const Model = this.Model(modelName); 
     const responses:CrudResponse[] = []; 
     const ids = entries?.map(e => e._id); 
-    const toDelete = ids ? await this.Read(modelName, ids): await this.Read(modelName); 
+    const toDelete = ids ? await this.Find(modelName, ids): await this.Find(modelName); 
 
     const foundIds = toDelete.map(e=> JSON.stringify(e._id)); 
     const notFound = entries?.filter(e => { 
