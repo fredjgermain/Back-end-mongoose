@@ -1,8 +1,8 @@
 import CrudMongoose from '../crud/crudmongoose'; 
 import mongoose from 'mongoose'; 
-import {mockCollection, forms, instructions, responses, questions, patients, answers, sessions} from './mockdata'; 
+import {mockCollection, forms, instructions, responses, questions, patients, answers, appointments} from './mockdata'; 
 import {collectionsSchema, formsSchema, instructionsSchema, 
-  responsesSchema, questionsSchema, patientsSchema, answersSchema, sessionsSchema} from './mockmodels'; 
+  responsesSchema, questionsSchema, patientsSchema, answersSchema, appointmentsSchema} from './mockmodels'; 
 
 //export const crud = new CrudMongoose(); 
 
@@ -20,7 +20,7 @@ const collectionsMap = [
   {collectionName:'questions', schema:new mongoose.Schema(questionsSchema), data:questions}, 
   {collectionName:'patients', schema:new mongoose.Schema(patientsSchema), data:patients}, 
   {collectionName:'answers', schema:new mongoose.Schema(answersSchema), data:answers}, 
-  {collectionName:'sessions', schema:new mongoose.Schema(sessionsSchema), data:sessions}, 
+  {collectionName:'appointements', schema:new mongoose.Schema(appointmentsSchema), data:appointments}, 
 ]; 
 
 
@@ -36,7 +36,7 @@ export async function MockData(crud:CrudMongoose) {
   for(let i=0; i<collectionsMap.length; i++) { 
     await crud.Create(collectionsMap[i].collectionName, collectionsMap[i].data); 
   } 
-
+} 
   /*for(let i=0; i<collectionsMap.length; i++) { 
     const read = await crud.Read(collectionsMap[i].collectionName); 
   } 
@@ -60,4 +60,4 @@ export async function MockData(crud:CrudMongoose) {
   } 
   const createInvalid = await crud.Create('forms', invalidForm); 
   console.log(createInvalid); */
-} 
+// } 

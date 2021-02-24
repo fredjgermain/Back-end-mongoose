@@ -40,7 +40,7 @@ const answersSchema = {
 
 
 // SESSION --------------------------------------
-const sessionsSchema = { 
+const appointmentsSchema = { 
   _id: Schema.Types.ObjectId, 
   patient: { 
     type: Schema.Types.ObjectId, 
@@ -198,6 +198,6 @@ export {collectionsSchema,
   questionsSchema, 
   patientsSchema, 
   answersSchema, 
-  sessionsSchema}; 
+  appointmentsSchema}; 
 
 //crud.RegisterModel('collections', collectionsSchema); 

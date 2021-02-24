@@ -283,12 +283,12 @@ const patients = [
 ]
 
 
-// ANSWERS --------------------------------------
+// ANSWERS -------------------------------------- 
 const answers:any[] = []; 
 
 
-// SESSIONS -------------------------------------
-const sessions:any[] = []; 
+// SESSIONS ------------------------------------- 
+const appointments:any[] = []; 
 
 
-export {mockCollection, forms, instructions, responses, questions, patients, answers, sessions}; 
+export {mockCollection, forms, instructions, responses, questions, patients, answers, appointments}; 
