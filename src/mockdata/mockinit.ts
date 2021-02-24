@@ -20,7 +20,7 @@ const collectionsMap = [
   {collectionName:'questions', schema:new mongoose.Schema(questionsSchema), data:questions}, 
   {collectionName:'patients', schema:new mongoose.Schema(patientsSchema), data:patients}, 
   {collectionName:'answers', schema:new mongoose.Schema(answersSchema), data:answers}, 
-  {collectionName:'appointements', schema:new mongoose.Schema(appointmentsSchema), data:appointments}, 
+  {collectionName:'appointments', schema:new mongoose.Schema(appointmentsSchema), data:appointments}, 
 ]; 
 
 
@@ -36,7 +36,10 @@ export async function MockData(crud:CrudMongoose) {
   for(let i=0; i<collectionsMap.length; i++) { 
     await crud.Create(collectionsMap[i].collectionName, collectionsMap[i].data); 
   } 
-} 
+}
+  /*const read = await crud.Read('appointments'); 
+  console.log(read); */
+  
   /*for(let i=0; i<collectionsMap.length; i++) { 
     const read = await crud.Read(collectionsMap[i].collectionName); 
   } 
