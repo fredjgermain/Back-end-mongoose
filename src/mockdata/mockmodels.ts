@@ -34,11 +34,13 @@ const appointmentsSchema = {
 // ANSWER ---------------------------------------
 const answersSchema = { 
   _id: Schema.Types.ObjectId, 
-  appointment: { 
+  patient: { 
     type: Schema.Types.ObjectId, 
-    ref: 'appointments', 
-    label: 'Appointment', 
-    required: true, 
+    ref: 'patients', 
+    label: 'Patient', 
+  }, 
+  date: { 
+    type: Date, 
   }, 
   question: { 
     type: Schema.Types.ObjectId, 
