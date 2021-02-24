@@ -34,10 +34,10 @@ const appointmentsSchema = {
 // ANSWER ---------------------------------------
 const answersSchema = { 
   _id: Schema.Types.ObjectId, 
-  session: { 
+  appointment: { 
     type: Schema.Types.ObjectId, 
-    ref: 'sessions', 
-    label: 'Session', 
+    ref: 'appointments', 
+    label: 'Appointment', 
     required: true, 
   }, 
   question: { 
