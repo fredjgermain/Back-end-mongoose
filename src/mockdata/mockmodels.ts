@@ -17,6 +17,20 @@ function ElementsValidation (values:any[], ElementValidation:(e:any) => boolean)
 } 
 
 
+// APPOINTMENTS ---------------------------------
+const appointmentsSchema = { 
+  _id: Schema.Types.ObjectId, 
+  patient: { 
+    type: Schema.Types.ObjectId, 
+    ref: 'patients', 
+    label: 'Patient', 
+  }, 
+  date: { 
+    type: Date, 
+  } 
+} 
+
+
 // ANSWER ---------------------------------------
 const answersSchema = { 
   _id: Schema.Types.ObjectId, 
@@ -37,20 +51,6 @@ const answersSchema = {
     label: 'Answer', 
   } 
 }
-
-
-// SESSION --------------------------------------
-const appointmentsSchema = { 
-  _id: Schema.Types.ObjectId, 
-  patient: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'patients', 
-    label: 'Patient', 
-  }, 
-  date: { 
-    type: Date, 
-  } 
-} 
 
 
 // PATIENT --------------------------------------

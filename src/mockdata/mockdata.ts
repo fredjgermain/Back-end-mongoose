@@ -35,8 +35,8 @@ const mockCollection = [
   }, 
   {
     _id: new mongoose.Types.ObjectId(), 
-    accessor:'sessions', 
-    label:'Sessions', 
+    accessor:'appointments', 
+    label:'Appointments', 
   }, 
 ]; 
 
