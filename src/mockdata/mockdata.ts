@@ -33,11 +33,6 @@ const collections = [
     accessor:'answers', 
     label:'Answers', 
   }, 
-  {
-    _id: new mongoose.Types.ObjectId(), 
-    accessor:'appointments', 
-    label:'Appointments', 
-  }, 
 ]; 
 
 // FORM -----------------------------------------
@@ -287,8 +282,5 @@ const patients = [
 const answers:any[] = []; 
 
 
-// SESSIONS ------------------------------------- 
-const visits:any[] = []; 
 
-
-export const datas = {collections, forms, instructions, responses, questions, patients, answers, visits}; 
+export const datas = {collections, forms, instructions, responses, questions, patients, answers}; 

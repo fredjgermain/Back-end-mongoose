@@ -17,8 +17,8 @@ function ElementsValidation (values:any[], ElementValidation:(e:any) => boolean)
 } 
 
 
-// APPOINTMENTS ---------------------------------
-const visits = { 
+// ANSWER ---------------------------------------
+const answers = { 
   _id: Schema.Types.ObjectId, 
   patient: { 
     type: Schema.Types.ObjectId, 
@@ -27,17 +27,6 @@ const visits = {
   }, 
   date: { 
     type: Date, 
-  } 
-} 
-
-
-// ANSWER ---------------------------------------
-const answers = { 
-  _id: Schema.Types.ObjectId, 
-  appointment: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'appointements', 
-    label: 'Appointment', 
   }, 
   question: { 
     type: Schema.Types.ObjectId, 
@@ -196,5 +185,4 @@ export const models = {collections,
   responses, 
   questions, 
   patients, 
-  answers, 
-  visits}; 
+  answers}; 
