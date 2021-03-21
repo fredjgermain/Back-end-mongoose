@@ -18,7 +18,7 @@ function ElementsValidation (values:any[], ElementValidation:(e:any) => boolean)
 
 
 // APPOINTMENTS ---------------------------------
-const appointmentsSchema = { 
+const appointments = { 
   _id: Schema.Types.ObjectId, 
   patient: { 
     type: Schema.Types.ObjectId, 
@@ -32,15 +32,12 @@ const appointmentsSchema = {
 
 
 // ANSWER ---------------------------------------
-const answersSchema = { 
+const answers = { 
   _id: Schema.Types.ObjectId, 
-  patient: { 
+  appointment: { 
     type: Schema.Types.ObjectId, 
-    ref: 'patients', 
-    label: 'Patient', 
-  }, 
-  date: { 
-    type: Date, 
+    ref: 'appointements', 
+    label: 'Appointment', 
   }, 
   question: { 
     type: Schema.Types.ObjectId, 
@@ -56,7 +53,7 @@ const answersSchema = {
 
 
 // PATIENT --------------------------------------
-const patientsSchema = { 
+const patients = { 
   _id: Schema.Types.ObjectId, 
   firstName: { 
     type: String, 
@@ -82,7 +79,7 @@ const patientsSchema = {
 
 
 // RESPONSE -------------------------------------
-const responsesSchema = { 
+const responses = { 
   _id: Schema.Types.ObjectId, 
   rId: { 
     type: String, 
@@ -97,7 +94,7 @@ const responsesSchema = {
 
 
 // FORM -----------------------------------------
-const formsSchema = { 
+const forms = { 
   _id: Schema.Types.ObjectId, 
   fId: { 
     type: String, 
@@ -117,7 +114,7 @@ const formsSchema = {
 
 
 // INSTRUCTION ----------------------------------
-const instructionsSchema = { 
+const instructions = { 
   _id: Schema.Types.ObjectId, 
   iId: { 
     type: String, 
@@ -136,7 +133,7 @@ const instructionsSchema = {
 
 
 // QUESTION -------------------------------------
-const questionsSchema = {
+const questions = {
   _id: Schema.Types.ObjectId, 
   qId: { 
     type: String,
@@ -180,7 +177,7 @@ const questionsSchema = {
 
 
 // CollectionsSchema ----------------------------
-const collectionsSchema = { 
+const collections = { 
   _id: Schema.Types.ObjectId, 
   accessor: { 
     type: String, 
@@ -193,13 +190,11 @@ const collectionsSchema = {
   } 
 } 
 
-export {collectionsSchema, 
-  formsSchema, 
-  instructionsSchema, 
-  responsesSchema, 
-  questionsSchema, 
-  patientsSchema, 
-  answersSchema, 
-  appointmentsSchema}; 
-
-//crud.RegisterModel('collections', collectionsSchema); 
+export const models = {collections, 
+  forms, 
+  instructions, 
+  responses, 
+  questions, 
+  patients, 
+  answers, 
+  appointments}; 

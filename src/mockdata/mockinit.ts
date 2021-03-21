@@ -1,8 +1,7 @@
 import CrudMongoose from '../crud/crudmongoose'; 
 import mongoose from 'mongoose'; 
-import {mockCollection, forms, instructions, responses, questions, patients, answers, appointments} from './mockdata'; 
-import {collectionsSchema, formsSchema, instructionsSchema, 
-  responsesSchema, questionsSchema, patientsSchema, answersSchema, appointmentsSchema} from './mockmodels'; 
+import { datas } from './mockdata'; 
+import { models } from './mockmodels'; 
 
 //export const crud = new CrudMongoose(); 
 
@@ -12,7 +11,12 @@ crud.Connect(url, dbName); */
 
 
 // MOCK -----------------------------------------
-const collectionsMap = [ 
+const collectionsMap = Object.keys(models).map( (collectionName:string) => { 
+  const schema = new mongoose.Schema((models as {[key:string]:any})[collectionName]); 
+  const data = (datas as {[key:string]:any})[collectionName]; 
+  return {collectionName, schema, data}; 
+}) 
+/*const collectionsMap = [ 
   {collectionName:'collections', schema:new mongoose.Schema(collectionsSchema), data:mockCollection}, 
   {collectionName:'forms', schema:new mongoose.Schema(formsSchema), data:forms}, 
   {collectionName:'instructions', schema:new mongoose.Schema(instructionsSchema), data:instructions}, 
@@ -21,7 +25,7 @@ const collectionsMap = [
   {collectionName:'patients', schema:new mongoose.Schema(patientsSchema), data:patients}, 
   {collectionName:'answers', schema:new mongoose.Schema(answersSchema), data:answers}, 
   {collectionName:'appointments', schema:new mongoose.Schema(appointmentsSchema), data:appointments}, 
-]; 
+]; */
 
 
 export async function MockData(crud:CrudMongoose) { 

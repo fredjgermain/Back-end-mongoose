@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 
 // Mock Collections -----------------------------
-const mockCollection = [ 
+const collections = [ 
   { 
     _id: new mongoose.Types.ObjectId(), 
     accessor:'responses', 
@@ -291,4 +291,4 @@ const answers:any[] = [];
 const appointments:any[] = []; 
 
 
-export {mockCollection, forms, instructions, responses, questions, patients, answers, appointments}; 
+export const datas = {collections, forms, instructions, responses, questions, patients, answers, appointments}; 
