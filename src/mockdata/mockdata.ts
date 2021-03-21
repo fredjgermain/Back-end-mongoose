@@ -288,7 +288,7 @@ const answers:any[] = [];
 
 
 // SESSIONS ------------------------------------- 
-const appointments:any[] = []; 
+const visits:any[] = []; 
 
 
-export const datas = {collections, forms, instructions, responses, questions, patients, answers, appointments}; 
+export const datas = {collections, forms, instructions, responses, questions, patients, answers, visits}; 
