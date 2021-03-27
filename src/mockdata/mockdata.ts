@@ -93,7 +93,7 @@ const responses = [
     rId: 'Days of the week', 
     values: ['monday', 'thuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], 
   }, 
-  { 
+  /*{ 
     _id:new mongoose.Types.ObjectId(), 
     rId: 'Disagree-Agree', 
     values: ['strongly disagree', 'disagree', 'neutral', 'agree', 'strongly agree'], 
@@ -112,7 +112,7 @@ const responses = [
     _id:new mongoose.Types.ObjectId(), 
     rId: 'Last month days', 
     values: Range_DaysPerMonth(), 
-  } 
+  } */
 ]
 
 //console.log([instructions[0]]); 
@@ -224,7 +224,7 @@ const questions = [
     order: 10, 
     qId: 'f2d1q4', 
     labels: ['Question d2q1', 'Question d2q1'], 
-    responseType: responses[1],
+    responseType: responses[0],
     optional: false, 
     instructions: [instructions[1]], 
   }, 
@@ -235,7 +235,7 @@ const questions = [
     order: 10, 
     qId: 'f3d1q1', 
     labels: ['Question d2q2', 'Question d2q2'], 
-    responseType: responses[1],
+    responseType: responses[0],
     optional: false, 
     instructions: [instructions[1]], 
   }, 
@@ -246,7 +246,7 @@ const questions = [
     order: 10, 
     qId: 'f3d1q2', 
     labels: ['Question d2q3', 'Question d2q3'], 
-    responseType: responses[1],  
+    responseType: responses[0],  
     optional: false, 
     instructions: [instructions[1]], 
   },
@@ -257,7 +257,7 @@ const questions = [
     order: 10, 
     qId: 'f3d1q3', 
     labels: ['Question d3q1', 'Question d3q1'], 
-    responseType: responses[2], 
+    responseType: responses[0], 
     optional: false, 
     instructions: [instructions[1]], 
   }, 
@@ -268,7 +268,7 @@ const questions = [
     order: 10, 
     qId: 'f3d1q4', 
     labels: ['Question d3q2', 'Question d3q2'], 
-    responseType: responses[2], 
+    responseType: responses[0], 
     optional: false, 
     instructions: [instructions[1]], 
   }, 
@@ -279,7 +279,7 @@ const questions = [
     order: 10, 
     qId: 'f3d1q5', 
     labels: ['Question d3q3', 'Question d3q3'], 
-    responseType: responses[2],  
+    responseType: responses[0],  
     optional: false, 
     instructions: [instructions[1]], 
   }

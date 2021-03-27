@@ -40,6 +40,9 @@ export async function MockData(crud:CrudMongoose) {
   for(let i=0; i<collectionsMap.length; i++) { 
     await crud.Create(collectionsMap[i].collectionName, collectionsMap[i].data); 
   } 
+
+  const read = await crud.Read('responses'); 
+  console.log(read); 
 }
   /*const read = await crud.Read('appointments'); 
   console.log(read); */
