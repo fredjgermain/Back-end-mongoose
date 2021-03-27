@@ -1,6 +1,6 @@
 import CrudMongoose from '../crud/crudmongoose'; 
 import mongoose from 'mongoose'; 
-import { datas } from './mockdata'; 
+import { datas } from './mockdata/mockdata'; 
 import { models } from './mockmodels'; 
 
 //export const crud = new CrudMongoose(); 

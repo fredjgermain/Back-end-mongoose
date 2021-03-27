@@ -1,6 +1,6 @@
 import express from 'express'; 
 import {MakeController} from '../controller/controller'; 
-import {MockData} from '../mockdata/mockinit'; 
+import {MockData} from '../mockdb/mockinit'; 
 import * as bodyParser from 'body-parser';
 
 import cors from "cors"; 

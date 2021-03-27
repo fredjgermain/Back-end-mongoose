@@ -1,123 +1,11 @@
 import mongoose from 'mongoose'; 
-import { DaysPerMonth } from '../utils/date.utils'; 
+import { forms } from './mockform'; 
+import { instructions } from './mockinstructions'; 
+import { responses } from './mockresponses'; 
 
 
-
-function Range(min:number, max:number) { 
-  const range = []; 
-  for(let i = min; i < max; i++) 
-    range.push(i); 
-  return range; 
-}
-
-function Range_DaysPerMonth() { 
-  const year = new Date().getFullYear(); 
-  const month = new Date().getMonth(); 
-  const daysPerMonth = DaysPerMonth(year, month); 
-  return Range(1, daysPerMonth); 
-} 
-
-
-
-// Mock Collections -----------------------------
-const collections = [ 
-  { 
-    _id: new mongoose.Types.ObjectId(), 
-    accessor:'responses', 
-    label:'Responses', 
-  }, 
-  { 
-    _id: new mongoose.Types.ObjectId(), 
-    accessor:'instructions', 
-    label:'Instructions', 
-  }, 
-  {
-    _id: new mongoose.Types.ObjectId(), 
-    accessor:'forms', 
-    label:'Forms', 
-  }, 
-  {
-    _id: new mongoose.Types.ObjectId(), 
-    accessor:'questions', 
-    label:'Questions', 
-  }, 
-  {
-    _id: new mongoose.Types.ObjectId(), 
-    accessor:'patients', 
-    label:'Patients', 
-  }, 
-  {
-    _id: new mongoose.Types.ObjectId(), 
-    accessor:'answers', 
-    label:'Answers', 
-  }, 
-]; 
-
-// FORM -----------------------------------------
-const forms = [ 
-  { 
-    _id: new mongoose.Types.ObjectId(), 
-    fId: 'f1', 
-    titles: ['Title form 1', 'titre form 1'], 
-  }, 
-  { 
-    _id: new mongoose.Types.ObjectId(), 
-    fId: 'f2', 
-    titles: ['Title form 2', 'titre form 2'], 
-  },
-  { 
-    _id: new mongoose.Types.ObjectId(), 
-    fId: 'f3', 
-    titles: ['Title form 3', 'titre form 3'], 
-  } 
-] 
-
-// INSTRUCTION ----------------------------------
-const instructions = [ 
-  { 
-    _id: new mongoose.Types.ObjectId(), 
-    iId: 'i1', 
-    label: ['Instruction 1', 'Instruction 1'], 
-  }, 
-  { 
-    _id: new mongoose.Types.ObjectId(), 
-    iId: 'i2', 
-    labels: ['Instruction 2', 'Instruction 2'], 
-  } 
-] 
-
-// RESPONSE -------------------------------------
-const responses = [ 
-  { 
-    _id:new mongoose.Types.ObjectId(), 
-    rId: 'Days of the week', 
-    values: ['monday', 'thuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], 
-  }, 
-  /*{ 
-    _id:new mongoose.Types.ObjectId(), 
-    rId: 'Disagree-Agree', 
-    values: ['strongly disagree', 'disagree', 'neutral', 'agree', 'strongly agree'], 
-  }, 
-  { 
-    _id:new mongoose.Types.ObjectId(), 
-    rId: 'From 0 to 7', 
-    values: Range(0,7), 
-  }, 
-  { 
-    _id:new mongoose.Types.ObjectId(), 
-    rId: 'Last 30 days', 
-    values: Range(0, 30), 
-  }, 
-  { 
-    _id:new mongoose.Types.ObjectId(), 
-    rId: 'Last month days', 
-    values: Range_DaysPerMonth(), 
-  } */
-]
-
-//console.log([instructions[0]]); 
 // QUESTION -------------------------------------
-const questions = [ 
+export const questions = [ 
   { 
     _id: new mongoose.Types.ObjectId(), 
     form: forms[0], 
@@ -285,21 +173,3 @@ const questions = [
   }
 ]
 
-
-// PATIENTS -------------------------------------
-const patients = [
-  {
-    _id: new mongoose.Types.ObjectId(), 
-    firstName: 'Frédéric', 
-    lastName: 'Jean-Germain', 
-    ramq: 'JEAF83112314', 
-  }
-]
-
-
-// ANSWERS -------------------------------------- 
-const answers:any[] = []; 
-
-
-
-export const datas = {collections, forms, instructions, responses, questions, patients, answers}; 
