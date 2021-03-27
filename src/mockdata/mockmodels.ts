@@ -56,6 +56,7 @@ const patients = {
   }, 
   ramq: { 
     type: String, 
+    abbrev: true, 
     label: 'Ramq', 
     required: [true, 'is required'], 
     regex: '^[a-zA-Z]{4}[0-9]{8}$', 
@@ -75,10 +76,18 @@ const responses = {
     label: 'Response Id', 
     abbrev: true, 
   }, 
-  responseType: { 
+  /*type: { 
+    type: String, 
+    label: 'Type', 
+  }*/ 
+  values: { 
+    //type: [String], 
+    label: 'Values', 
+  } 
+  /*responseType: { 
     type: Schema.Types.Mixed, 
     label: 'Responses', 
-  } 
+  } */ 
 } 
 
 
@@ -110,10 +119,6 @@ const instructions = {
     label: 'Instruction Id', 
     abbrev: true, 
   }, 
-  /*order: { 
-    type: Number, 
-    label: 'Display order', 
-  }, */
   labels: { 
     type: [String], 
     label: "Instruction label", 

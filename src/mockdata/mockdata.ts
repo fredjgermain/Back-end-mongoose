@@ -1,4 +1,22 @@
 import mongoose from 'mongoose'; 
+import { DaysPerMonth } from '../utils/date.utils'; 
+
+
+
+function Range(min:number, max:number) { 
+  const range = []; 
+  for(let i = min; i < max; i++) 
+    range.push(i); 
+  return range; 
+}
+
+function Range_DaysPerMonth() { 
+  const year = new Date().getFullYear(); 
+  const month = new Date().getMonth(); 
+  const daysPerMonth = DaysPerMonth(year, month); 
+  return Range(1, daysPerMonth); 
+} 
+
 
 
 // Mock Collections -----------------------------
@@ -72,27 +90,28 @@ const instructions = [
 const responses = [ 
   { 
     _id:new mongoose.Types.ObjectId(), 
-    rId: 'weekdays', 
-    responseType: { 
-      type: 'String', 
-      enum: ['monday', 'thuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], 
-    }, 
+    rId: 'Days of the week', 
+    values: ['monday', 'thuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], 
   }, 
   { 
     _id:new mongoose.Types.ObjectId(), 
-    rId: 'disagreeagree', 
-    responseType: { 
-      type: 'String', 
-      enum: ['strongly disagree', 'disagree', 'neutral', 'agree', 'strongly agree'], 
-    }, 
+    rId: 'Disagree-Agree', 
+    values: ['strongly disagree', 'disagree', 'neutral', 'agree', 'strongly agree'], 
   }, 
   { 
     _id:new mongoose.Types.ObjectId(), 
-    rId: '0-7', 
-    responseType: { 
-      type: 'String', 
-      enum: [0, 1, 2, 3, 4, 5, 6, 7], 
-    }, 
+    rId: 'From 0 to 7', 
+    values: Range(0,7), 
+  }, 
+  { 
+    _id:new mongoose.Types.ObjectId(), 
+    rId: 'Last 30 days', 
+    values: Range(0, 30), 
+  }, 
+  { 
+    _id:new mongoose.Types.ObjectId(), 
+    rId: 'Last month days', 
+    values: Range_DaysPerMonth(), 
   } 
 ]
 
