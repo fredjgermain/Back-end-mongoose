@@ -3,7 +3,7 @@ import { DaysPerMonth } from '../../utils/date.utils';
 
 function Range(min:number, max:number) { 
   const range = []; 
-  for(let i = min; i < max; i++) 
+  for(let i = min; i <= max; i++) 
     range.push(i); 
   return range; 
 }
@@ -11,7 +11,7 @@ function Range(min:number, max:number) {
 function Range_DaysPerMonth() { 
   const year = new Date().getFullYear(); 
   const month = new Date().getMonth(); 
-  const daysPerMonth = DaysPerMonth(year, month); 
+  const daysPerMonth = DaysPerMonth(year, month+1); 
   return Range(1, daysPerMonth); 
 } 
 
