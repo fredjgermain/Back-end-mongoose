@@ -81,7 +81,7 @@ const responses = {
     label: 'Type', 
   }*/ 
   values: { 
-    //type: [String], 
+    type: [String], 
     label: 'Values', 
   } 
   /*responseType: { 
