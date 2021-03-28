@@ -1,7 +1,7 @@
 import mongoose from 'mongoose'; 
-import { forms } from './mockform'; 
-import { instructions } from './mockinstructions'; 
-import { responses } from './mockresponses'; 
+import { forms } from './forms.mockdata'; 
+import { instructions } from './instructions.mockdata'; 
+import { responses } from './responses.mockdata'; 
 
 
 // QUESTION -------------------------------------

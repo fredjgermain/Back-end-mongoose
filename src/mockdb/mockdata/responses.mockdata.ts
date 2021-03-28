@@ -20,7 +20,7 @@ function Range_DaysPerMonth() {
 export const responses = [ 
   { 
     _id:new mongoose.Types.ObjectId(), 
-    rId: 'Days of the week', 
+    rId: 'Weeks-day', 
     values: ['monday', 'thuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], 
   }, 
   { 
@@ -30,7 +30,7 @@ export const responses = [
   }, 
   { 
     _id:new mongoose.Types.ObjectId(), 
-    rId: 'From 0 to 7', 
+    rId: 'From 0-7', 
     values: Range(0,7), 
   }, 
   { 

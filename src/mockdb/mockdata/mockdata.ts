@@ -1,8 +1,9 @@
 import mongoose from 'mongoose'; 
-import { forms } from './mockform'; 
-import { instructions } from './mockinstructions'; 
-import { responses } from './mockresponses'; 
-import { questions } from './mockquestions'; 
+import { forms } from './forms.mockdata'; 
+import { instructions } from './instructions.mockdata'; 
+import { responses } from './responses.mockdata'; 
+import { questions } from './questions.mockdata'; 
+import { patients } from './patients.mockdata'; 
 
 
 // Mock Collections -----------------------------
@@ -40,15 +41,6 @@ const collections = [
 ]; 
 
 
-// PATIENTS -------------------------------------
-const patients = [
-  {
-    _id: new mongoose.Types.ObjectId(), 
-    firstName: 'Frédéric', 
-    lastName: 'Jean-Germain', 
-    ramq: 'JEAF83112314', 
-  }
-]
 
 // ANSWERS -------------------------------------- 
 const answers:any[] = []; 
