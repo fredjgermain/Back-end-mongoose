@@ -16,7 +16,6 @@ export const answers = {
     type: Schema.Types.ObjectId, 
     ref: 'questions', 
     label: 'Question', 
-    required: true, 
   }, 
   answer: { 
     type: Number, 
