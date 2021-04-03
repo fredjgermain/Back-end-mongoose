@@ -4,7 +4,7 @@ import { instructions } from './instructions.mockdata';
 import { responses } from './responses.mockdata'; 
 import { questions } from './questions.mockdata'; 
 import { patients } from './patients.mockdata'; 
-
+import { answers } from './answers.mockdata'; 
 
 // Mock Collections -----------------------------
 const collections = [ 
@@ -43,7 +43,6 @@ const collections = [
 
 
 // ANSWERS -------------------------------------- 
-const answers:any[] = []; 
 
 
 export const datas = {collections, forms, instructions, responses, questions, patients, answers}; 
