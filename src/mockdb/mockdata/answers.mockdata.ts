@@ -7,7 +7,7 @@ export const answers = [
   { 
     _id: new mongoose.Types.ObjectId(), 
     patient: patients[0], 
-    date: new Date(), 
+    //date: new Date(), 
     question: questions[0], 
     answer: -1, 
   }
