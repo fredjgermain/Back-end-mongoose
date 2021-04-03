@@ -10,10 +10,10 @@ export const answers = {
     label: 'Patient', 
     abbrev: true, 
   }, 
-  /*date: { 
+  date: { 
     type: Date, 
     label: 'Date', 
-  }, */
+  }, 
   question: { 
     type: Schema.Types.ObjectId, 
     ref: 'questions', 
