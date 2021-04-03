@@ -12,7 +12,7 @@ export const answers = {
   }, 
   date: { 
     type: Date, 
-    label: 'Date', 
+    label: 'date', 
   }, 
   question: { 
     type: Schema.Types.ObjectId, 
