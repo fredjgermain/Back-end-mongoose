@@ -5,17 +5,22 @@ import mongoose from 'mongoose';
 export const forms = [ 
   { 
     _id: new mongoose.Types.ObjectId(), 
-    fId: 'f1', 
-    titles: ['Title form 1', 'titre form 1'], 
+    fId: 'pdqd5', 
+    titles: ['Dépression PDQ-D-5'], 
   }, 
   { 
     _id: new mongoose.Types.ObjectId(), 
-    fId: 'f2', 
-    titles: ['Title form 2', 'titre form 2'], 
-  },
+    fId: 'asrs', 
+    titles: ['ASRS'], 
+  }, 
   { 
     _id: new mongoose.Types.ObjectId(), 
-    fId: 'f3', 
-    titles: ['Title form 3', 'titre form 3'], 
+    fId: 'whodas', 
+    titles: ['WHODAS 2.0'], 
+  }, 
+  { 
+    _id: new mongoose.Types.ObjectId(), 
+    fId: 'edec', 
+    titles: ["EDEC Échelle d'autoévaluation cognitive"], 
   } 
 ] 

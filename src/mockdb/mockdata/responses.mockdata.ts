@@ -20,6 +20,43 @@ function Range_DaysPerMonth() {
 export const responses = [ 
   { 
     _id:new mongoose.Types.ObjectId(), 
+    rId: 'pdqd5', 
+    values: ['Jamais', 'Rarement (1 ou 2 fois)', 'Quelques fois (3 a 5 fois)', 'Souvent (environ 1 fois par jours)', `Tres souvent (plus d'une fois par jours)`], 
+  }, 
+  { 
+    _id:new mongoose.Types.ObjectId(), 
+    rId: 'asrs', 
+    values: [`Pas du tout`, `Rarement`, `Parfois`, `Souvent`, `Tres souvent`], 
+  }, 
+  { 
+    _id:new mongoose.Types.ObjectId(), 
+    rId: 'whodas_r1', 
+    values: [`Aucune, Légere, Modérée, Severe, Extreme ou ne peut pas faire`], 
+  }, 
+  { 
+    _id:new mongoose.Types.ObjectId(), 
+    rId: 'whodas_r2', 
+    values: Range(0, 30), 
+  }, 
+  {
+    _id:new mongoose.Types.ObjectId(), 
+    rId: 'edec_r', 
+    values: [
+      `(0) Aucunement`, 
+      `(1) Légerement`, 
+      `(2) Légerement`, 
+      `(3) Légerement`, 
+      `(4) Modérément`, 
+      `(5) Modérément`, 
+      `(6) Modérément`, 
+      `(7) Beaucoup`, 
+      `(8) Beaucoup`, 
+      `(9) Beaucoup`, 
+      `(10) Etremement`, 
+    ]
+  },
+  /*{ 
+    _id:new mongoose.Types.ObjectId(), 
     rId: 'Weeks-day', 
     values: ['monday', 'thuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday'], 
   }, 
@@ -42,5 +79,5 @@ export const responses = [
     _id:new mongoose.Types.ObjectId(), 
     rId: 'Last month days', 
     values: Range_DaysPerMonth(), 
-  } 
+  } */
 ]
