@@ -46,17 +46,17 @@ const asrs_q = [
   {labels: [`A quelle fréquence vous arrive-t-il de vous sentir excessivement actif et contraint de faire quelques chose, comme si vous étiez entrainé malgré vous par un moteur?`]}, 
   {labels: [`A quelle fréquence vous arrive-t-il de faire des fautes d'étourderie lorsque vous travaillez a un projet ennuyeyx ou difficule?`]}, 
   {labels: [`A quelles fréquence vous arrive-t-il d'avoir des difficultés a vous concentrer lorsque vous faites un travail ennuyeux ou répétitif`]}, 
-  {label: [`A quelle fréquence vous arrive-t-il d'avoir des difficultés a vous concentrer sur les propos de votre interlocuteur, meme s'il s'adresse directement a vous?`]}, 
-  {label: [`Arrive-t-il d'égarer des choses ou d'avoir des difficultés a les retrouver?`]}, 
-  {label: [`A la maison ou au travail, a quelle fréquence vous arrive-t-il d'etre distrait par l'activité ou le bruit autour de vous?`]}, 
-  {label: [`A quelle fréquence vous arrive-t-il d'avoir des difficultés a vous détendre et a vous reposer dans vos temps libre?`]}, 
-  {label: [`A quelle fréquences vous arrive-t-il de parler de facon excessive a l'occasion de vos rencontres sociales?`]}, 
-  {label: [`Pendant une conversation, a quelle fréquence vous arrive-t-il de terminer les phrases de vos interlocuteurs avant que ces derniers aient le temps de les finir?`]}, 
-  {label: [`A quelle fréquence vous arrive-t-il d'avoir des difficultés a attendre votre tour lorsque vous devrier le faire?`]}, 
-  {label: [`A quelle fréquence vous arrive-t-il d'interrompre les gens lorsqu'ils sont occupés?`]}
+  {labels: [`A quelle fréquence vous arrive-t-il d'avoir des difficultés a vous concentrer sur les propos de votre interlocuteur, meme s'il s'adresse directement a vous?`]}, 
+  {labels: [`Arrive-t-il d'égarer des choses ou d'avoir des difficultés a les retrouver?`]}, 
+  {labels: [`A la maison ou au travail, a quelle fréquence vous arrive-t-il d'etre distrait par l'activité ou le bruit autour de vous?`]}, 
+  {labels: [`A quelle fréquence vous arrive-t-il d'avoir des difficultés a vous détendre et a vous reposer dans vos temps libre?`]}, 
+  {labels: [`A quelle fréquences vous arrive-t-il de parler de facon excessive a l'occasion de vos rencontres sociales?`]}, 
+  {labels: [`Pendant une conversation, a quelle fréquence vous arrive-t-il de terminer les phrases de vos interlocuteurs avant que ces derniers aient le temps de les finir?`]}, 
+  {labels: [`A quelle fréquence vous arrive-t-il d'avoir des difficultés a attendre votre tour lorsque vous devrier le faire?`]}, 
+  {labels: [`A quelle fréquence vous arrive-t-il d'interrompre les gens lorsqu'ils sont occupés?`]}
 ] 
 
-const asrs_questions = asrs_q.map( (question, i) => { 
+const asrs_questions = asrs_q.map( ({labels}, i) => { 
   const _id = new mongoose.Types.ObjectId(); 
   const qId = 'asrs'+(i+1); 
   const form = asrs_f; 
@@ -65,7 +65,7 @@ const asrs_questions = asrs_q.map( (question, i) => {
   const order = i; 
   const responseType = pdqd5_r; 
   const optional = false; 
-  return {_id, qId, form, instructions, section, order, responseType, optional, ...question}; 
+  return {_id, qId, form, instructions, section, order, responseType, optional, labels}; 
 }) 
 
 
