@@ -6,12 +6,12 @@ export const instructions = [
   { 
     _id: new mongoose.Types.ObjectId(), 
     iId: "i_pdqd5_1", 
-    label: ['Veuillez choisir a meilleure réponse correspondant a ce que vous avez vécu au cours des 7 derniers jours.'], 
+    labels: ['Veuillez choisir a meilleure réponse correspondant a ce que vous avez vécu au cours des 7 derniers jours.'], 
   }, 
   { 
     _id: new mongoose.Types.ObjectId(), 
     iId: "i_pdqd5_2", 
-    label: ['Au cours des 7 derniers jours a quelle fréquence avez-vous ...'], 
+    labels: ['Au cours des 7 derniers jours a quelle fréquence avez-vous ...'], 
   }, 
   { 
     _id: new mongoose.Types.ObjectId(), 
